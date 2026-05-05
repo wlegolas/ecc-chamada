@@ -1,6 +1,6 @@
 'use client';
 
-import type { ColumnDef } from '@tanstack/react-table';
+import type { Column, ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, ClipboardCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -10,35 +10,30 @@ export type Attendance = {
   group: string;
 };
 
+function ColumnHeaderButton({ column, label }: { column: Column<Attendance>, label: string }) {
+  return (
+    <Button
+      variant="ghost"
+      className="font-bold cursor-pointer"
+      onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+    >
+      {label}
+      <ArrowUpDown />
+    </Button>
+  );
+}
+
 export const columns: Array<ColumnDef<Attendance>> = [
   {
     accessorKey: 'couple',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          className="font-bold"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Casal
-          <ArrowUpDown />
-        </Button>
-      );
+      return <ColumnHeaderButton column={column} label="Casal" />;
     },
   },
   {
     accessorKey: 'group',
     header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          className="font-bold"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Círculo
-          <ArrowUpDown />
-        </Button>
-      );
+      return <ColumnHeaderButton column={column} label="Círculo" />;
     },
   },
   {

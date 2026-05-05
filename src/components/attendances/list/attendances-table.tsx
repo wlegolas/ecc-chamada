@@ -1,6 +1,6 @@
 'use client';
 
-import { type ColumnDef, flexRender, getCoreRowModel, getFilteredRowModel, useReactTable } from '@tanstack/react-table';
+import { type ColumnDef, flexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
 import { useCallback } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { SearchAttendances } from './search-attendances';
@@ -17,6 +17,15 @@ export function AttendancesTable<TData, TValue>({ columns, data }: AttendancesTa
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     globalFilterFn: 'includesString',
+    getSortedRowModel: getSortedRowModel(),
+    initialState: {
+      sorting: [
+        {
+          id: 'couple',
+          desc: false,
+        },
+      ],
+    },
   });
 
   const handleSearch = useCallback(
