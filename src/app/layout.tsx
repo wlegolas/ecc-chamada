@@ -1,6 +1,7 @@
 import { NotebookPen } from 'lucide-react';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Inter } from 'next/font/google';
+import { Toaster } from '@/components/ui/sonner';
 import { cn } from '@/lib/utils';
 import './globals.css';
 
@@ -45,6 +46,14 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <AppHeader />
         <main className="container mx-auto py-4 sm:px-6 lg:px-8">{children}</main>
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            classNames: {
+              toast: '!bg-green-300',
+            },
+          }}
+        />
       </body>
     </html>
   );

@@ -2,6 +2,7 @@
 
 import { CircleDashed, Loader, UsersRound } from 'lucide-react';
 import { type PropsWithChildren, useActionState, useEffect } from 'react';
+import { toast } from 'sonner';
 import { type Attendance, registerAttendance } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { DialogClose, DialogFooter } from '@/components/ui/dialog';
@@ -32,6 +33,10 @@ export function AttendancesConfirmDialogContent({ attendance, onConfirm, childre
 
   useEffect(() => {
     if (state.success) {
+      toast('Presença confirmada!', {
+        description: 'Sua presença foi confirmada, aproveite o Encontrão',
+      });
+
       onConfirm();
     }
   }, [state.success, onConfirm]);
