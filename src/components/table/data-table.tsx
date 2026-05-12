@@ -2,11 +2,13 @@
 
 import { flexRender } from '@tanstack/react-table';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { type UseDataTableProps, useDataTable } from '@/hooks';
+import type { UseDataTableResult } from '@/hooks';
 
-export function DataTable<TData, TValue>(props: UseDataTableProps<TData, TValue>) {
-  const { table } = useDataTable(props);
+interface DataTableProps<TData> {
+  table: UseDataTableResult<TData>['table'];
+}
 
+export function DataTable<TData>({ table }: DataTableProps<TData>) {
   return (
     <div className="overflow-hidden rounded-md border">
       <Table>
@@ -38,7 +40,7 @@ export function DataTable<TData, TValue>(props: UseDataTableProps<TData, TValue>
           ) : (
             <TableRow>
               <TableCell
-                colSpan={props.columns.length}
+                colSpan={table.getAllColumns().length}
                 className="h-24 text-center"
               >
                 No results.

@@ -1,10 +1,9 @@
 'use client';
 
-import { getFilteredRowModel, getSortedRowModel } from '@tanstack/react-table';
 import { useCallback } from 'react';
 import type { Attendance } from '@/app/actions';
 import { DataTable } from '@/components/table';
-import { type DataTableOptions, useAttendancesTable } from '@/hooks';
+import { useAttendancesTable } from '@/hooks';
 import { AttendancesConfirmDialog } from './attendance-confirm-dialog';
 import { SearchAttendances } from './search-attendances';
 
@@ -13,20 +12,7 @@ interface AttendancesTableProps {
 }
 
 export function AttendancesTable({ data }: AttendancesTableProps) {
-  const { columns, table, selectedAttendance, clearSelectedAttendance } = useAttendancesTable({ data });
-  const tableOptions: DataTableOptions<Attendance> = {
-    getFilteredRowModel: getFilteredRowModel(),
-    globalFilterFn: 'includesString',
-    getSortedRowModel: getSortedRowModel(),
-    initialState: {
-      sorting: [
-        {
-          id: 'couple',
-          desc: false,
-        },
-      ],
-    },
-  };
+  const { table, selectedAttendance, clearSelectedAttendance } = useAttendancesTable({ data });
 
   const handleSearch = useCallback(
     (value: string) => {
@@ -35,13 +21,9 @@ export function AttendancesTable({ data }: AttendancesTableProps) {
     [table],
   );
 
-  const handleConfirmDialogCancel = () => {
+  const handleDialogActions = useCallback(() => {
     clearSelectedAttendance();
-  };
-
-  const handleConfirmDialogConfirm = () => {
-    clearSelectedAttendance();
-  };
+  }, [clearSelectedAttendance]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -49,16 +31,11 @@ export function AttendancesTable({ data }: AttendancesTableProps) {
       {selectedAttendance && (
         <AttendancesConfirmDialog
           attendance={selectedAttendance}
-          onCancel={handleConfirmDialogCancel}
-          onConfirm={handleConfirmDialogConfirm}
+          onCancel={handleDialogActions}
+          onConfirm={handleDialogActions}
         />
       )}
-      {/* <AttendancesConfirmForm /> */}
-      <DataTable
-        columns={columns}
-        data={data}
-        tableOptions={tableOptions}
-      />
+      <DataTable table={table} />
     </div>
   );
 }

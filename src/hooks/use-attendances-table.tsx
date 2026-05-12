@@ -1,12 +1,12 @@
 'use client';
 
-import type { ColumnDef } from '@tanstack/react-table';
+import { type ColumnDef, getFilteredRowModel, getSortedRowModel } from '@tanstack/react-table';
 import { ClipboardCheck } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import type { Attendance } from '@/app/actions';
 import { ColumnHeaderButton } from '@/components/table';
 import { Button } from '@/components/ui/button';
-import { type UseDataTableResult, useDataTable } from './use-data-table';
+import { type DataTableOptions, type UseDataTableResult, useDataTable } from './use-data-table';
 
 interface UseAttendancesTableProps {
   data: Array<Attendance>;
@@ -20,6 +20,19 @@ interface UseAttendancesTableResult extends UseDataTableResult<Attendance> {
 
 export function useAttendancesTable({ data }: UseAttendancesTableProps): UseAttendancesTableResult {
   const [selectedAttendance, setSelectedAttendance] = useState<Attendance | undefined>(undefined);
+  const tableOptions: DataTableOptions<Attendance> = {
+    getFilteredRowModel: getFilteredRowModel(),
+    globalFilterFn: 'includesString',
+    getSortedRowModel: getSortedRowModel(),
+    initialState: {
+      sorting: [
+        {
+          id: 'couple',
+          desc: false,
+        },
+      ],
+    },
+  };
   const columns: Array<ColumnDef<Attendance>> = [
     {
       accessorKey: 'couple',
@@ -64,10 +77,11 @@ export function useAttendancesTable({ data }: UseAttendancesTableProps): UseAtte
       },
     },
   ];
+  const { table } = useDataTable({ columns, data, tableOptions });
+
   const clearSelectedAttendance = useCallback(() => {
     setSelectedAttendance(undefined);
   }, []);
-  const { table } = useDataTable({ columns, data });
 
   return { columns, selectedAttendance, clearSelectedAttendance, table };
 }
