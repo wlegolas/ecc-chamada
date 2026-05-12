@@ -2,10 +2,9 @@
 
 import { CircleDashed, Loader, UsersRound } from 'lucide-react';
 import { type PropsWithChildren, useActionState, useEffect } from 'react';
-import { registerAttendance } from '@/app/actions';
+import { type Attendance, registerAttendance } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { DialogClose, DialogFooter } from '@/components/ui/dialog';
-import type { Attendance } from '@/app/actions';
 
 interface AttendancesConfirmFormProps extends PropsWithChildren {
   attendance: Attendance;

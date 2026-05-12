@@ -3,15 +3,10 @@
 import type { ColumnDef } from '@tanstack/react-table';
 import { ClipboardCheck } from 'lucide-react';
 import { useCallback, useState } from 'react';
+import type { Attendance } from '@/app/actions';
 import { ColumnHeaderButton } from '@/components/table';
 import { Button } from '@/components/ui/button';
 import { type UseDataTableResult, useDataTable } from './use-data-table';
-
-export type Attendance = {
-  id: string;
-  couple: string;
-  group: string;
-};
 
 interface UseAttendancesTableProps {
   data: Array<Attendance>;

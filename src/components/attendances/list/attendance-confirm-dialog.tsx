@@ -1,6 +1,6 @@
 import { ClipboardCheck } from 'lucide-react';
+import type { Attendance } from '@/app/actions';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import type { Attendance } from '@/hooks';
 import { AttendancesConfirmDialogContent } from './attendance-confirm-dialog-content';
 
 interface AttendancesConfirmDialogProps {
