@@ -2,7 +2,7 @@
 
 import type { ColumnDef } from '@tanstack/react-table';
 import { ClipboardCheck } from 'lucide-react';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { ColumnHeaderButton } from '@/components/table';
 import { Button } from '@/components/ui/button';
 import { type UseDataTableResult, useDataTable } from './use-data-table';
@@ -20,6 +20,7 @@ interface UseAttendancesTableProps {
 interface UseAttendancesTableResult extends UseDataTableResult<Attendance> {
   columns: Array<ColumnDef<Attendance>>;
   selectedAttendance?: Attendance;
+  clearSelectedAttendance: (attendance?: Attendance) => void;
 }
 
 export function useAttendancesTable({ data }: UseAttendancesTableProps): UseAttendancesTableResult {
@@ -69,7 +70,10 @@ export function useAttendancesTable({ data }: UseAttendancesTableProps): UseAtte
       },
     },
   ];
+  const clearSelectedAttendance = useCallback(() => {
+    setSelectedAttendance(undefined);
+  }, []);
   const { table } = useDataTable({ columns, data });
 
-  return { columns, selectedAttendance, table };
+  return { columns, selectedAttendance, clearSelectedAttendance, table };
 }

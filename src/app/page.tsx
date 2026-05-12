@@ -1,4 +1,5 @@
-import { type Attendance, AttendancesTable, columns } from '@/components/attendances';
+import { AttendancesTable } from '@/components/attendances';
+import type { Attendance } from '@/hooks';
 
 async function getData(): Promise<Array<Attendance>> {
   return [
@@ -23,10 +24,5 @@ async function getData(): Promise<Array<Attendance>> {
 export default async function Home() {
   const data = await getData();
 
-  return (
-    <AttendancesTable
-      columns={columns}
-      data={data}
-    />
-  );
+  return <AttendancesTable data={data} />;
 }

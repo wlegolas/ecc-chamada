@@ -1,7 +1,6 @@
 import { NotebookPen } from 'lucide-react';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Inter } from 'next/font/google';
-// import { TooltipProvider } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import './globals.css';
 
@@ -23,12 +22,6 @@ export const metadata: Metadata = {
 };
 
 export function AppHeader() {
-  // return (
-  //   <header className='flex items-center justify-between p-4 border-b border-border shadow-sm'>
-  //     <h1 className='text-2xl font-bold'>ECC Chamada</h1>
-  //   </header>
-  // );
-
   return (
     <header className="w-full bg-white/50 backdrop-blur-md dark:bg-black/50 border-b border-zinc-200 dark:border-zinc-800">
       <div className="container mx-auto flex gap-2 h-16 items-center px-4 sm:px-6 lg:px-8">
