@@ -1,28 +1,8 @@
+import { getCoupleData } from '@/app/actions';
 import { AttendancesTable } from '@/components/attendances';
-import type { Attendance } from '@/hooks';
-
-async function getData(): Promise<Array<Attendance>> {
-  return [
-    {
-      id: '728ed52f',
-      couple: 'Daiane & Weslley',
-      group: 'www.felicidade.com',
-    },
-    {
-      id: '728ed52b',
-      couple: 'Silvia & Wederson',
-      group: 'www.felicidade.com',
-    },
-    {
-      id: '728ed52c',
-      couple: 'Erica & Fabrício',
-      group: 'Amigos de Cristo',
-    },
-  ];
-}
 
 export default async function Home() {
-  const data = await getData();
+  const data = await getCoupleData();
 
   return <AttendancesTable data={data} />;
 }

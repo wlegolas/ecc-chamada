@@ -2,11 +2,11 @@
 
 import { getFilteredRowModel, getSortedRowModel } from '@tanstack/react-table';
 import { useCallback } from 'react';
+import type { Attendance } from '@/app/actions';
 import { DataTable } from '@/components/table';
-import { type Attendance, type DataTableOptions, useAttendancesTable } from '@/hooks';
+import { type DataTableOptions, useAttendancesTable } from '@/hooks';
 import { AttendancesConfirmDialog } from './attendance-confirm-dialog';
 import { SearchAttendances } from './search-attendances';
-import { AttendancesConfirmDialogContent } from './attendance-confirm-dialog-content';
 
 interface AttendancesTableProps {
   data: Array<Attendance>;

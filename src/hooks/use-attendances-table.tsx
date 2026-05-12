@@ -57,9 +57,8 @@ export function useAttendancesTable({ data }: UseAttendancesTableProps): UseAtte
 
         return (
           <Button
-            className="cursor-pointer font-bold"
+            className="font-bold cursor-pointer"
             onClick={() => {
-              console.log(`=> Selected: ${attendance.couple}`);
               setSelectedAttendance(attendance);
             }}
           >

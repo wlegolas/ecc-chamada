@@ -5,7 +5,7 @@ import { type PropsWithChildren, useActionState, useEffect } from 'react';
 import { registerAttendance } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { DialogClose, DialogFooter } from '@/components/ui/dialog';
-import type { Attendance } from '@/hooks';
+import type { Attendance } from '@/app/actions';
 
 interface AttendancesConfirmFormProps extends PropsWithChildren {
   attendance: Attendance;
@@ -39,6 +39,21 @@ export function AttendancesConfirmDialogContent({ attendance, onConfirm, childre
 
   return (
     <form action={formAction}>
+      <input
+        type="hidden"
+        name="id"
+        value={attendance.id}
+      />
+      <input
+        type="hidden"
+        name="husband"
+        value={attendance.husband}
+      />
+      <input
+        type="hidden"
+        name="wife"
+        value={attendance.wife}
+      />
       <input
         type="hidden"
         name="couple"
